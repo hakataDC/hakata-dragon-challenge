@@ -1,0 +1,560 @@
+const SITE_JSON_PATH = "./json/site.json";
+
+let siteData = null;
+let heroSliderIntervalId = null;
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const response = await fetch(SITE_JSON_PATH, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error("site.json の読み込みに失敗しました");
+    }
+
+    siteData = await response.json();
+    initializeSite(siteData);
+  } catch (error) {
+    console.error(error);
+    showFatalError();
+  }
+});
+
+function initializeSite(data) {
+  fillStaticText(data);
+  renderHeroSlides(data.heroImages || []);
+  renderCommonCards(data.commonCards || []);
+  renderMainTabs(data);
+  renderSponsors(data.sponsors || []);
+  renderFlyers(data.flyers || []);
+  renderFooter(data.site || {});
+  startHeroSlider();
+}
+
+function fillStaticText(data) {
+  const site = data.site || {};
+  const challenge = data.challenge || {};
+  const finalInfo = data.final || {};
+  const firstFlyerUrl = getFirstFlyerUrl(data.flyers || []);
+
+  document.title = site.title || "釣り大会公式サイト";
+
+  setText("site-subtitle", site.subtitle || "");
+  setText("site-title", site.title || "釣り大会公式サイト");
+  setText("hero-eyebrow", site.heroEyebrow || "FISHING TOURNAMENT");
+  setText("hero-title", site.heroTitle || site.title || "釣り大会公式サイト");
+  setText("hero-description", site.description || "");
+
+  setText("hero-challenge-period", formatDateRange(challenge.period?.start, challenge.period?.end));
+  setText("hero-final-date", formatDate(finalInfo.date));
+  setText("hero-final-reserve-date", formatDate(finalInfo.reserveDate));
+
+  setHref("header-entry-link", site.entryUrl || "#");
+  setHref("hero-entry-link", site.entryUrl || "#");
+  setHref("header-flyer-link", firstFlyerUrl || "#");
+
+  setText(
+    "challenge-summary-text",
+    challenge.summary ||
+      `${formatDateRange(challenge.period?.start, challenge.period?.end)}の期間中、対象の漁港・対象船で参加できます。`
+  );
+
+  const finalSummary = finalInfo.summary || [
+    finalInfo.port ? `${finalInfo.port}で開催` : "",
+    finalInfo.date ? `本戦: ${formatDate(finalInfo.date)}` : "",
+    finalInfo.reserveDate ? `予備日: ${formatDate(finalInfo.reserveDate)}` : ""
+  ].filter(Boolean).join(" / ");
+
+  setText("final-summary-text", finalSummary || "ファイナル情報を掲載します。");
+  setText("final-port-note", finalInfo.port ? `${finalInfo.port}の参加船一覧` : "参加船一覧");
+}
+
+function renderHeroSlides(images) {
+  const container = document.getElementById("hero-slider");
+  const template = document.getElementById("hero-slide-template");
+
+  clearChildren(container);
+
+  if (!images.length) {
+    const fallback = template.content.cloneNode(true);
+    const img = fallback.querySelector("img");
+    img.src = "https://placehold.co/1600x900?text=Fishing+Tournament";
+    img.alt = "大会イメージ";
+    container.appendChild(fallback);
+    return;
+  }
+
+  images.forEach((item) => {
+    const clone = template.content.cloneNode(true);
+    const img = clone.querySelector("img");
+    img.src = item.src || "";
+    img.alt = item.alt || "大会イメージ";
+    container.appendChild(clone);
+  });
+}
+
+function renderCommonCards(cards) {
+  renderInfoCardsInto("common-cards", cards, "共通情報はまだ登録されていません。");
+}
+
+function renderInfoCardsInto(containerId, cards, emptyText) {
+  const container = document.getElementById(containerId);
+  clearChildren(container);
+
+  if (!cards.length) {
+    container.appendChild(createEmptyMessage(emptyText));
+    return;
+  }
+
+  cards.forEach((card) => {
+    container.appendChild(createInfoCard(card));
+  });
+}
+
+function createInfoCard(cardData) {
+  const template = document.getElementById("info-card-template");
+  const clone = template.content.cloneNode(true);
+
+  clone.querySelector(".info-card-title").textContent = cardData.title || "";
+  clone.querySelector(".info-card-text").textContent = cardData.body || "";
+
+  const meta = clone.querySelector(".info-card-meta");
+  if (cardData.meta) {
+    meta.textContent = cardData.meta;
+    meta.hidden = false;
+  }
+
+  return clone;
+}
+
+function renderMainTabs(data) {
+  const mainButtonsContainer = document.getElementById("main-tab-buttons");
+  const template = document.getElementById("tab-button-template");
+
+  clearChildren(mainButtonsContainer);
+
+  const tabs = [
+    { id: "challenge", label: "チャレンジ" },
+    { id: "final", label: "ファイナル" }
+  ];
+
+  tabs.forEach((tab) => {
+    const clone = template.content.cloneNode(true);
+    const button = clone.querySelector(".tab-button");
+
+    button.textContent = tab.label;
+    button.id = `tab-${tab.id}`;
+    button.dataset.tab = tab.id;
+    button.setAttribute("aria-controls", `${tab.id}-panel`);
+    button.setAttribute("aria-selected", "false");
+
+    button.addEventListener("click", () => {
+      activateMainTab(tab.id);
+    });
+
+    mainButtonsContainer.appendChild(clone);
+  });
+
+  renderChallengeSection(data.challenge || {});
+  renderFinalSection(data.final || {});
+  activateMainTab(getDefaultMainTab(data));
+}
+
+function activateMainTab(tabId) {
+  const buttons = document.querySelectorAll("#main-tab-buttons .tab-button");
+  const challengePanel = document.getElementById("challenge-panel");
+  const finalPanel = document.getElementById("final-panel");
+
+  buttons.forEach((button) => {
+    button.setAttribute("aria-selected", button.dataset.tab === tabId ? "true" : "false");
+  });
+
+  const isChallenge = tabId === "challenge";
+  challengePanel.hidden = !isChallenge;
+  finalPanel.hidden = isChallenge;
+}
+
+function renderChallengeSection(challenge) {
+  renderInfoCardsInto("challenge-cards", challenge.cards || [], "チャレンジ情報はまだ登録されていません。");
+  renderPortTabs(challenge.ports || []);
+}
+
+function renderPortTabs(ports) {
+  const buttonsContainer = document.getElementById("port-tab-buttons");
+  const contentContainer = document.getElementById("challenge-port-content");
+  const template = document.getElementById("tab-button-template");
+
+  clearChildren(buttonsContainer);
+  clearChildren(contentContainer);
+
+  if (!ports.length) {
+    contentContainer.appendChild(createEmptyMessage("チャレンジ対象漁港はまだ登録されていません。"));
+    return;
+  }
+
+  ports.forEach((port, index) => {
+    const clone = template.content.cloneNode(true);
+    const button = clone.querySelector(".tab-button");
+
+    button.textContent = port.name || `漁港${index + 1}`;
+    button.dataset.portIndex = String(index);
+    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+
+    button.addEventListener("click", () => {
+      activatePortTab(index, ports);
+    });
+
+    buttonsContainer.appendChild(clone);
+  });
+
+  renderPortContent(ports[0]);
+}
+
+function activatePortTab(index, ports) {
+  const buttons = document.querySelectorAll("#port-tab-buttons .tab-button");
+
+  buttons.forEach((button) => {
+    button.setAttribute(
+      "aria-selected",
+      button.dataset.portIndex === String(index) ? "true" : "false"
+    );
+  });
+
+  renderPortContent(ports[index]);
+}
+
+function renderPortContent(port) {
+  const container = document.getElementById("challenge-port-content");
+  const template = document.getElementById("port-content-template");
+
+  clearChildren(container);
+
+  const clone = template.content.cloneNode(true);
+
+  clone.querySelector(".port-card-title").textContent = port.name || "漁港情報";
+  clone.querySelector(".port-boat-note").textContent = `${port.name || ""}で参加できる船一覧`;
+
+  const metaList = clone.querySelector(".port-meta-list");
+  const metaItems = [
+    { label: "開催期間", value: port.periodText },
+    { label: "案内", value: port.note },
+    { label: "住所", value: port.address }
+  ].filter((item) => item.value);
+
+  if (metaItems.length) {
+    metaItems.forEach((item) => {
+      metaList.appendChild(createPortMeta(item.label, item.value));
+    });
+  } else {
+    metaList.appendChild(createEmptyMessage("漁港情報がまだ登録されていません。"));
+  }
+
+  const iframe = clone.querySelector(".map-frame");
+  if (port.mapEmbedUrl) {
+    iframe.src = port.mapEmbedUrl;
+    iframe.title = `${port.name || "漁港"}の地図`;
+  } else {
+    iframe.removeAttribute("src");
+    iframe.title = "地図未設定";
+  }
+
+  const mapLinks = clone.querySelector(".map-links");
+  if (port.mapUrl) {
+    mapLinks.appendChild(createButtonLink("地図を開く", port.mapUrl, "button button-secondary"));
+  }
+  if (port.websiteUrl) {
+    mapLinks.appendChild(createButtonLink("関連案内", port.websiteUrl, "button button-secondary"));
+  }
+
+  const boatsContainer = clone.querySelector(".port-boats");
+  renderBoatListInto(boatsContainer, port.boats || [], port.name || "");
+
+  container.appendChild(clone);
+}
+
+function createPortMeta(label, value) {
+  const template = document.getElementById("port-meta-template");
+  const clone = template.content.cloneNode(true);
+
+  clone.querySelector(".port-meta-label").textContent = label;
+  clone.querySelector(".port-meta-value").textContent = value;
+
+  return clone;
+}
+
+function renderFinalSection(finalInfo) {
+  renderInfoCardsInto("final-cards", finalInfo.cards || [], "ファイナル情報はまだ登録されていません。");
+
+  const boatsContainer = document.getElementById("final-boats");
+  clearChildren(boatsContainer);
+  renderBoatListInto(boatsContainer, finalInfo.boats || [], finalInfo.port || "ファイナル");
+}
+
+function renderBoatListInto(container, boats, fallbackPort) {
+  clearChildren(container);
+
+  if (!boats.length) {
+    container.appendChild(createEmptyMessage("参加船はまだ登録されていません。"));
+    return;
+  }
+
+  boats.forEach((boat) => {
+    container.appendChild(createBoatCard(boat, fallbackPort));
+  });
+}
+
+function createBoatCard(boatData, fallbackPort = "") {
+  const template = document.getElementById("boat-card-template");
+  const clone = template.content.cloneNode(true);
+
+  const image = clone.querySelector(".boat-image");
+  image.src = boatData.image || "https://placehold.co/800x500?text=Boat";
+  image.alt = boatData.name || "参加船";
+
+  clone.querySelector(".boat-name").textContent = boatData.name || "参加船";
+  clone.querySelector(".boat-port").textContent = boatData.port || fallbackPort;
+  clone.querySelector(".boat-desc").textContent = boatData.description || "";
+
+  const links = clone.querySelector(".boat-links");
+
+  if (boatData.reservationUrl) {
+    links.appendChild(createBoatLink("予約案内", boatData.reservationUrl, true, true));
+  }
+
+  if (boatData.phone) {
+    links.appendChild(createBoatLink("電話する", `tel:${boatData.phone}`, false, false));
+  }
+
+  (boatData.sns || []).forEach((sns) => {
+    links.appendChild(createBoatLink(sns.label || sns.type || "SNS", sns.url || "#", false, true));
+  });
+
+  return clone;
+}
+
+function createBoatLink(label, url, isPrimary, external) {
+  const template = document.getElementById("boat-link-template");
+  const clone = template.content.cloneNode(true);
+  const link = clone.querySelector(".boat-link");
+
+  link.textContent = label;
+  link.href = url || "#";
+
+  if (isPrimary) {
+    link.classList.add("boat-link-primary");
+  }
+
+  if (!external) {
+    link.removeAttribute("target");
+    link.removeAttribute("rel");
+  }
+
+  return clone;
+}
+
+function renderSponsors(sponsors) {
+  const container = document.getElementById("sponsors-grid");
+  const template = document.getElementById("sponsor-card-template");
+
+  clearChildren(container);
+
+  if (!sponsors.length) {
+    container.appendChild(createEmptyMessage("協賛企業情報はまだ登録されていません。"));
+    return;
+  }
+
+  sponsors.forEach((sponsor) => {
+    const clone = template.content.cloneNode(true);
+    const link = clone.querySelector(".sponsor-link");
+    const img = clone.querySelector(".sponsor-logo");
+
+    img.src = sponsor.logo || "https://placehold.co/400x200?text=Sponsor";
+    img.alt = sponsor.name || "協賛企業ロゴ";
+
+    if (sponsor.url) {
+      link.href = sponsor.url;
+    } else {
+      link.href = "#";
+      link.removeAttribute("target");
+      link.removeAttribute("rel");
+      link.setAttribute("aria-label", sponsor.name || "協賛企業");
+    }
+
+    container.appendChild(clone);
+  });
+}
+
+function renderFlyers(flyers) {
+  const container = document.getElementById("flyers-grid");
+  const template = document.getElementById("flyer-card-template");
+
+  clearChildren(container);
+
+  if (!flyers.length) {
+    container.appendChild(createEmptyMessage("チラシ情報はまだ登録されていません。"));
+    return;
+  }
+
+  flyers.forEach((flyer) => {
+    const clone = template.content.cloneNode(true);
+
+    const thumb = clone.querySelector(".flyer-thumb");
+    thumb.src = flyer.thumbnail || flyer.image || "https://placehold.co/800x1000?text=Flyer";
+    thumb.alt = flyer.title || "大会チラシ";
+
+    clone.querySelector(".flyer-title").textContent = flyer.title || "大会チラシ";
+
+    const actions = clone.querySelector(".flyer-actions");
+    const imageUrl = flyer.image || flyer.thumbnail;
+    const pdfUrl = flyer.pdf;
+
+    if (imageUrl) {
+      actions.appendChild(createButtonLink("画像を見る", imageUrl, "flyer-link"));
+    }
+
+    if (pdfUrl) {
+      actions.appendChild(createButtonLink("PDFを見る", pdfUrl, "flyer-link"));
+    }
+
+    container.appendChild(clone);
+  });
+}
+
+function renderFooter(site) {
+  setText("footer-title", site.footerTitle || site.title || "");
+  setText("footer-text", site.footerText || "");
+}
+
+function createButtonLink(text, href, className) {
+  const a = document.createElement("a");
+  a.className = className;
+  a.textContent = text;
+  a.href = href || "#";
+  a.target = "_blank";
+  a.rel = "noopener";
+  return a;
+}
+
+function createEmptyMessage(text) {
+  const div = document.createElement("div");
+  div.className = "empty-message";
+  div.textContent = text;
+  return div;
+}
+
+function clearChildren(element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value ?? "";
+}
+
+function setHref(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.href = value ?? "#";
+}
+
+function getFirstFlyerUrl(flyers) {
+  const first = flyers[0];
+  if (!first) return "#";
+  return first.pdf || first.image || first.thumbnail || "#";
+}
+
+function startHeroSlider() {
+  const slider = document.getElementById("hero-slider");
+  if (!slider) return;
+
+  const slideCount = slider.children.length;
+  if (slideCount <= 1) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  if (heroSliderIntervalId) {
+    clearInterval(heroSliderIntervalId);
+  }
+
+  let currentIndex = 0;
+
+  heroSliderIntervalId = setInterval(() => {
+    currentIndex = (currentIndex + 1) % slideCount;
+    slider.scrollTo({
+      left: slider.clientWidth * currentIndex,
+      behavior: "smooth"
+    });
+  }, 4500);
+
+  window.addEventListener("resize", () => {
+    slider.scrollTo({
+      left: slider.clientWidth * currentIndex,
+      behavior: "auto"
+    });
+  });
+}
+
+function getDefaultMainTab(data) {
+  const now = new Date();
+  const challengeEnd = parseDate(data.challenge?.period?.end);
+  const finalDate = parseDate(data.final?.date);
+
+  if (finalDate && isSameDay(now, finalDate)) {
+    return "final";
+  }
+
+  if (challengeEnd && now <= challengeEnd) {
+    return "challenge";
+  }
+
+  if (finalDate && now >= finalDate) {
+    return "final";
+  }
+
+  return "challenge";
+}
+
+function parseDate(dateString) {
+  if (!dateString) return null;
+  const date = new Date(dateString);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function isSameDay(a, b) {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
+
+function formatDate(dateString) {
+  const date = parseDate(dateString);
+  if (!date) return "未定";
+
+  return new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }).format(date);
+}
+
+function formatDateRange(start, end) {
+  if (!start && !end) return "未定";
+  if (start && !end) return `${formatDate(start)}〜`;
+  if (!start && end) return `〜${formatDate(end)}`;
+  return `${formatDate(start)}〜${formatDate(end)}`;
+}
+
+function showFatalError() {
+  const main = document.getElementById("main-content");
+  if (!main) return;
+
+  main.innerHTML = `
+    <section class="section container">
+      <div class="empty-message">
+        サイト情報の読み込みに失敗しました。<br>
+        ファイル構成や json/site.json の記述を確認してください。
+      </div>
+    </section>
+  `;
+}
