@@ -1,15 +1,705 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>Hakata Dragon Challenge</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>博多湾ドラゴンチャレンジ</title>
+  <meta
+    name="description"
+    content="博多湾ドラゴンチャレンジ公式サイト。チャレンジ・ファイナルの大会情報、参加漁船、協賛企業、チラシ情報を掲載しています。"
+  />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
-
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="site-brand">
+        <p class="site-brand-sub">HAKATA DRAGON CHALLENGE</p>
+        <h1 class="site-title">博多湾ドラゴンチャレンジ</h1>
+      </div>
+    </div>
+  </header>
 
-<h1>Hakata Dragon Challenge</h1>
+  <main id="main-content">
+    <section class="hero" aria-label="メインビジュアル">
+      <div class="hero-slider" id="hero-slider">
+        <div class="hero-slide">
+          <img src="./images/hero/hero1.jpg" alt="太刀魚釣り大会の風景1" />
+        </div>
+        <div class="hero-slide">
+          <img src="./images/hero/hero2.jpg" alt="太刀魚釣り大会の風景2" />
+        </div>
+        <div class="hero-slide">
+          <img src="./images/hero/hero3.jpg" alt="太刀魚釣り大会の風景3" />
+        </div>
+      </div>
 
-<p>プロジェクトページ作成中</p>
+      <div class="hero-overlay">
+        <div class="container hero-content">
+          <p class="eyebrow">TACHIUO FISHING TOURNAMENT</p>
+          <h2 class="hero-title">博多の海で挑む<br>太刀魚釣り大会</h2>
+          <p class="hero-description">
+            チャレンジ期間中は対象の漁港・対象船で参加可能。<br>
+            成績上位者によるファイナルも開催します。
+          </p>
+        </div>
+      </div>
+    </section>
 
+    <section class="section container" aria-labelledby="overview-title">
+      <div class="section-heading">
+        <p class="section-subtitle">INFORMATION</p>
+        <h2 class="section-title" id="overview-title">大会概要</h2>
+      </div>
+
+      <div class="stack-grid">
+        <article class="info-card">
+          <h3 class="info-card-title">大会概要</h3>
+          <p class="info-card-text">
+            博多湾で人気の太刀魚釣りを、より多くのアングラーの皆様に安全にお楽しみいただくことを目的としたイベントです。<br>
+            また、アングラー、遊漁船、釣具・釣餌メーカー、小売店の皆様のご協力のもと、釣り業界全体の活性化を目指して開催いたします。
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3 class="info-card-title">釣法</h3>
+          <p class="info-card-text">
+            テンヤ または ジギング（ジグヘッドあり）<br>
+            餌は各自でご用意ください。
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3 class="info-card-title">注意事項</h3>
+          <p class="info-card-text">
+            天候・海況により出船中止となる場合があります。安全確保のため、船長の判断に従ってください。<br>
+            傷害保険に加入いたしますが、保険の範囲を超えた傷病及び他人への賠償責任は、ご本人の負担で対応していただきます。<br>
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3 class="info-card-title">安全管理</h3>
+          <p class="info-card-text">
+            チャレンジ・ファイナルを問わず、ライフジャケットの着用を必須とします。<br />
+            また、熱中症対策は各参加者の責任において十分に行ってください。
+          </p>
+        </article>
+    
+        <article class="info-card">
+          <h3 class="info-card-title">競技中の注意</h3>
+          <p class="info-card-text">
+            競技中のアルコール摂取は禁止とします。<br />
+            想定外の事象が発生した場合は、競技委員会の判断によりルールを変更する場合があります。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="event-section" aria-labelledby="event-title">
+      <div class="section-heading">
+        <p class="section-subtitle">EVENTS</p>
+        <h2 class="section-title" id="event-title">大会情報</h2>
+      </div>
+
+      <div class="tabs tabs-main">
+        <input type="radio" name="main-tab" id="main-tab-challenge" checked />
+        <input type="radio" name="main-tab" id="main-tab-final" />
+
+        <div class="tab-buttons" role="tablist" aria-label="大会区分">
+          <label for="main-tab-challenge" class="tab-button">チャレンジ</label>
+          <label for="main-tab-final" class="tab-button">ファイナル</label>
+        </div>
+
+        <div class="tab-panels">
+          <!-- Challenge -->
+          <section class="tab-panel challenge-panel">
+            <div class="event-layout">
+              <div class="event-header-card">
+                <h3 class="event-header-title">チャレンジ</h3>
+                <p class="event-header-text">
+                  チャレンジ期間中は提携遊漁船にて何度でも参加可能です。
+                  都合のよい日程と船を選んで挑戦してください。
+                </p>
+              </div>
+
+              <div class="stack-grid">
+                <article class="info-card">
+                  <h3 class="info-card-title">チャレンジ期間</h3>
+                  <p class="info-card-text">2026年 6月1日　~　2026年8月9日</p>
+                </article>
+
+                <article class="info-card">
+                  <h3 class="info-card-title">参加方法</h3>
+                  <p class="info-card-text">
+                    提携遊漁船を対象に、出船前にチャレンジ表明をしてステッカーを受け取ることを参加資格とします。<br>
+                    参加費：1,000円
+                  </p>
+                </article>
+
+                <article class="info-card">
+                  <h3 class="info-card-title">計量方法</h3>
+                  <p class="info-card-text">
+                    1匹長寸を各遊漁船船長が計測します。<br>
+                    複数遊漁船にてチャレンジ通過の場合、参加者に連絡の上通過する遊漁船を決めていただきます。<br>
+                    ファイナル辞退の場合、次点者が繰り上げで選出となります。
+                  </p>
+                </article>
+
+                <article class="info-card">
+                  <h3 class="info-card-title">仕掛けについて</h3>
+                  <p class="info-card-text">
+                    仕掛けは大会規定に準じます。<br />
+                    ただし、チャレンジ期間中は船長判断により変更となる場合があります。
+                  </p>
+                </article>
+              </div>
+
+              <div class="subsection">
+                <div class="subsection-header">
+                  <h3 class="subsection-title">チャレンジ対象漁港</h3>
+                  <p class="subsection-note">港ごとに参加船を切り替えて確認できます。</p>
+                </div>
+
+                <div class="tabs tabs-port">
+                  <input type="radio" name="challenge-port-tab" id="port-hiroro" checked />
+                  <input type="radio" name="challenge-port-tab" id="port-meinohama" />
+                  <input type="radio" name="challenge-port-tab" id="port-hakozaki" />
+                  <input type="radio" name="challenge-port-tab" id="port-higashihama" />
+                  <input type="radio" name="challenge-port-tab" id="port-kamome" />
+
+                  <div class="tab-buttons tab-buttons-port" role="tablist" aria-label="チャレンジ対象漁港">
+                    <label for="port-hiroro" class="tab-button">弘漁港</label>
+                    <label for="port-meinohama" class="tab-button">姪浜漁港</label>
+                    <label for="port-hakozaki" class="tab-button">箱崎漁港</label>
+                    <label for="port-higashihama" class="tab-button">東浜船溜まり</label>
+                    <label for="port-kamome" class="tab-button">かもめ広場</label>
+                  </div>
+
+                  <div class="tab-panels">
+                    <section class="tab-panel port-panel-hiroro">
+                      <article class="boats-panel">
+                        <h4 class="port-card-title">弘漁港の参加漁船</h4>
+                        <div class="boat-grid">
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">金比羅丸</h5>
+                              <p class="boat-port">弘漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a
+                                  class="boat-link boat-link-main"
+                                  href="https://www.instagram.com/hiro.konpira/"
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  Instagramを見る
+                                </a>
+                                <a
+                                  class="boat-link boat-link-sub"
+                                  href="tel:08027704981"
+                                >
+                                  ☏：080-2770-4981
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">Crazy Bob</h5>
+                              <p class="boat-port">弘漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a
+                                  class="boat-link boat-link-main"
+                                  href="https://www.instagram.com/crazy.bob2017/"
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  Instagramを見る
+                                </a>
+                                <a
+                                  class="boat-link boat-link-sub"
+                                  href="tel:09033296156"
+                                >
+                                  ☏：090-3329-6156
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">ガルフ</h5>
+                              <p class="boat-port">弘漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a
+                                  class="boat-link boat-link-main"
+                                  href="https://www.instagram.com/fishing.boat.gulf/"
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  Instagramを見る
+                                </a>
+                                <a
+                                  class="boat-link boat-link-sub"
+                                  href="tel:09057352222"
+                                >
+                                  ☏：090-5735-2222
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">照玉丸</h5>
+                              <p class="boat-port">弘漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a
+                                  class="boat-link boat-link-main"
+                                  href="https://www.instagram.com/teritamagram_2020/"
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  Instagramを見る
+                                </a>
+                                <a
+                                  class="boat-link boat-link-sub"
+                                  href="tel:09047778974"
+                                >
+                                  ☏：090-4777-8974
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                      </article>
+                    </section>
+
+                    <section class="tab-panel port-panel-meinohama">
+                      <article class="boats-panel">
+                        <h4 class="port-card-title">姪浜漁港の参加漁船</h4>
+                        <div class="boat-grid">
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">風仁丸</h5>
+                              <p class="boat-port">姪浜漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/hidekikamo/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:09011988640">
+                                    ☏：090-1198-8640
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">こてつ</h5>
+                              <p class="boat-port">姪浜漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/kotetsu_fishing.boat/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08064355895">
+                                  ☏：080-6435-5895
+                                </a>
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">もんじゃ丸</h5>
+                              <p class="boat-port">姪浜漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/shitamachiya_monjamaru/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:09079810907">
+                                  ☏：090-7981-0907
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">ドナルド</h5>
+                              <p class="boat-port">姪浜漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/kimura.donald.96/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08064463146">
+                                  ☏：080-6446-3146
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">はなまる</h5>
+                              <p class="boat-port">姪浜漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/yoshinaga.ryuichi/reels/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:09074750791">
+                                  ☏：090-7475-0791
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">ALMARE</h5>
+                              <p class="boat-port">姪浜漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/almare.angler_toshipedia/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08031868300">
+                                  ☏：080-3186-8300
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                      </article>
+                    </section>
+
+                    <section class="tab-panel port-panel-hakozaki">
+                      <article class="boats-panel">
+                        <h4 class="port-card-title">箱崎漁港の参加漁船</h4>
+                        <div class="boat-grid">
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">グランデ</h5>
+                              <p class="boat-port">箱崎漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/grande_tairaba/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08027892020">
+                                  ☏：080-2789-2020
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">NineBlue</h5>
+                              <p class="boat-port">箱崎漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/nineblue_yuji/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08092471010">
+                                  ☏：080-9247-1010
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">エル・クルーズ</h5>
+                              <p class="boat-port">箱崎漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/l.cruise_iwatakuya/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08083918543">
+                                  ☏：080-8391-8543
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">天神丸</h5>
+                              <p class="boat-port">箱崎漁港</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/syudai1026/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08027265844">
+                                  ☏：080-2726-5844
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                      </article>
+                    </section>
+
+                    <section class="tab-panel port-panel-higashihama">
+                      <article class="boats-panel">
+                        <h4 class="port-card-title">東浜船溜まりの参加漁船</h4>
+                        <div class="boat-grid">
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">海皇丸</h5>
+                              <p class="boat-port">東浜船溜まり</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/kaioumaru31/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08070030730">
+                                  ☏：080-7003-0730
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                      </article>
+                    </section>
+
+                    <section class="tab-panel port-panel-kamome">
+                      <article class="boats-panel">
+                        <h4 class="port-card-title">かもめ広場の参加漁船</h4>
+                        <div class="boat-grid">
+                          <article class="boat-card compact boat-card-elegant">
+                            <div class="boat-card-top"></div>
+                            <div class="boat-body">
+                              <p class="boat-label">FISHING BOAT</p>
+                              <h5 class="boat-name">海神</h5>
+                              <p class="boat-port">かもめ広場</p>
+                              <div class="boat-links boat-links-stack">
+                                <a class="boat-link boat-link-main" href="https://www.instagram.com/wadatumi.1091/" target="_blank" rel="noopener">Instagramを見る</a>
+                                <a class="boat-link boat-link-sub" href="tel:08055001091">
+                                  ☏：080-5500-1091
+                                </a>                              
+                              </div>
+                            </div>
+                          </article>
+                        </div>
+                      </article>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Final -->
+          <section class="tab-panel final-panel">
+            <div class="event-layout">
+              <div class="event-header-card">
+                <h3 class="event-header-title">ファイナル</h3>
+                <p class="event-header-text">
+                  チャレンジ成績上位者による決勝大会です。<br />
+                  提携遊漁船からエントリー数に応じて各1～2名をご招待します。
+                </p>
+              </div>
+          
+              <div class="stack-grid">
+                <article class="info-card">
+                  <h3 class="info-card-title">開催情報</h3>
+                  <p class="info-card-text">
+                    開催日：8月23日<br />
+                    予備日：8月30日<br />
+                    参加費：無料<br />
+                    集合場所：弘漁港（荷捌き場付近）
+                  </p>
+                </article>
+          
+                <article class="info-card">
+                  <h3 class="info-card-title">受付・進行</h3>
+                  <p class="info-card-text">
+                    受付：03:00～03:30<br />
+                    上記時間までに連絡なく来場されない場合は失格とします。<br />
+                    競技説明：03:30～04:00
+                  </p>
+                </article>
+          
+                <article class="info-card">
+                  <h3 class="info-card-title">計量方法</h3>
+                  <p class="info-card-text">
+                    太刀魚2匹の合計長寸により順位を決定します。（同率の場合大きい方の一匹長寸）
+                  </p>
+                </article>
+          
+                <article class="info-card">
+                  <h3 class="info-card-title">参加条件</h3>
+                  <p class="info-card-text">
+                    未成年者が参加する場合は、保護者同伴を必須とします。
+                  </p>
+                </article>
+          
+                <article class="info-card">
+                  <h3 class="info-card-title">競技上の注意</h3>
+                  <p class="info-card-text">
+                    釣座はくじ引きにより決定します。<br />
+                    移動は船長の指示に従ってください。<br />
+                    魚の取り込みは参加者自身で行うものとし、ロッドによる抜き上げは禁止とします。
+                  </p>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" aria-labelledby="notice-title">
+      <div class="section-heading">
+        <p class="section-subtitle">NOTICE</p>
+        <h2 class="section-title" id="notice-title">禁止事項・免責事項</h2>
+      </div>
+    
+      <div class="stack-grid">
+        <article class="info-card">
+          <h3 class="info-card-title">延期・中止時の取扱い</h3>
+          <p class="info-card-text">
+            ファイナルが延期または中止となった場合であっても、チャレンジ料の返却は行わず、翌年へ持ち越しとします。
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3 class="info-card-title">責任範囲</h3>
+          <p class="info-card-text">
+            事故、けが、病気、盗難、紛失、船舶事故その他一切のトラブルについて、主催者は責任を負いません。
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3 class="info-card-title">失格について</h3>
+          <p class="info-card-text">
+            禁止行為または不正行為が確認された場合は、直ちに失格とします。<br />
+            また、翌年以降の選考対象外とします。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="sponsors" aria-labelledby="sponsors-title">
+      <div class="section-heading">
+        <h2 class="section-title" id="sponsors-title">協賛</h2>
+      </div>
+
+      <div class="sponsor-grid">
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://www.instagram.com/kameya.fukuokahara/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/かめや.png" alt="かめや" />
+          </a>
+        </article>
+
+        <article class="sponsor-card is-white-logo">
+          <a class="sponsor-link" href="https://www.seaguar.ne.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/シーガー.png" alt="シーガー" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://www.instagram.com/suzuki_shouten2022/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/鈴木商店.png" alt="鈴木商店" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://zenith-dream.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/ゼニス.png" alt="ゼニス" />
+          </a>
+        </article>
+
+        <article class="sponsor-card is-white-logo">
+          <a class="sponsor-link" href="https://www.instagram.com/tsurilandtsurigu/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/つりランド.png" alt="つりランド釣具" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://www.duel.co.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/デュエル.png" alt="ヂュエル" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="#" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/中原釣具.png" alt="中原釣具" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://www.hayabusa.co.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/ハヤブサ.png" alt="ハヤブサ" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://hirokyu.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/ヒロキュー.jpg" alt="ヒロキュー" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://progre.ltd/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/プログレ.png" alt="プログレ" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://marukin-net.co.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/まるきん.webp" alt="まるきん" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://www.majorcraft.co.jp/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/メジャークラフト.png" alt="メジャークラフト" />
+          </a>
+        </article>
+
+        <article class="sponsor-card">
+          <a class="sponsor-link" href="https://www.yamaria.co.jp/yamashita" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/ヤマシタ.webp" alt="ヤマシタ" />
+          </a>
+        </article>
+
+        <article class="sponsor-card is-white-logo">
+          <a class="sponsor-link" href="https://yoshidatsuriguten.com/" target="_blank" rel="noopener">
+            <img class="sponsor-logo" src="./images/sponsors/ヨシダ釣具.png" alt="ヨシダ釣具" />
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container">
+      <h2 class="section-title">チラシ</h2>
+      <div class="flyer-grid">
+        <a href="./files/posterFIX.pdf" target="_blank" class="flyer-card">
+          <img
+            src="./images/flyers/posterFIX.jpg"
+            alt="大会チラシ"
+            class="flyer-thumb"
+          />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-title">博多湾ドラゴンチャレンジ2026 </p>
+      <p class="footer-text"></p>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
 </body>
 </html>
