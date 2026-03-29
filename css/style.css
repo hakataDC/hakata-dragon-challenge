@@ -1243,3 +1243,29 @@ textarea:focus-visible {
     white-space: nowrap !important;
   }
 }
+
+/* ページ全体は絶対スクロールさせない */
+body {
+  overflow-x: hidden;
+}
+
+/* 港タブだけスクロールさせる */
+.tabs-port {
+  overflow: hidden;
+}
+
+.tabs-port .tab-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 8px;
+
+  /* これ重要 */
+  max-width: 100%;
+}
+
+/* タブははみ出すけど親ははみ出さない */
+.tabs-port .tab-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
