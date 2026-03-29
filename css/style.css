@@ -848,7 +848,7 @@ textarea:focus-visible {
     line-height: 1.3;
   }
 
-  .tab-buttons,
+  .tab-buttons:not(.tab-buttons-port),
   .flyer-actions,
   .boat-links {
     flex-direction: column;
