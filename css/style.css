@@ -1209,3 +1209,37 @@ textarea:focus-visible {
     white-space: nowrap;
   }
 }
+
+@media (max-width: 640px) {
+  /* チャレンジ / ファイナル */
+  .tabs-main .tab-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: stretch !important;
+    gap: 10px !important;
+  }
+
+  .tabs-main .tab-buttons .tab-button {
+    width: 50% !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  /* 漁港タブ */
+  .tabs-port .tab-buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px !important;
+  }
+
+  .tabs-port .tab-buttons .tab-button {
+    width: auto !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+}
