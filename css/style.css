@@ -1164,3 +1164,48 @@ textarea:focus-visible {
     height: 56px;
   }
 }
+
+@media (max-width: 640px) {
+  .tab-buttons-port {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+  }
+
+  .tab-buttons-port .tab-button {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 640px) {
+
+  /* メインタブは横並びのまま */
+  .tab-buttons:not(.tab-buttons-port) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .tab-buttons:not(.tab-buttons-port) .tab-button {
+    width: auto;
+    flex: 1;
+  }
+
+  /* 港タブは横スクロール */
+  .tab-buttons-port {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+  }
+
+  .tab-buttons-port .tab-button {
+    flex: 0 0 auto;
+    width: auto;
+    white-space: nowrap;
+  }
+}
