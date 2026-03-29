@@ -64,6 +64,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -409,11 +410,8 @@ textarea:focus-visible {
   pointer-events: none;
 }
 
-.tab-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: var(--space-5);
+.tab-panels > .tab-panel {
+  display: none;
 }
 
 .tab-button {
@@ -443,8 +441,12 @@ textarea:focus-visible {
   box-shadow: var(--shadow-md);
 }
 
-.tab-panels > .tab-panel {
-  display: none;
+/* メインタブ */
+.tabs-main .tab-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: var(--space-5);
 }
 
 #main-tab-challenge:checked ~ .tab-buttons label[for="main-tab-challenge"],
@@ -463,15 +465,23 @@ textarea:focus-visible {
   display: block;
 }
 
-/* =========================
-   Port Tabs
-========================= */
+/* 漁港タブ */
+.tabs-port {
+  overflow: hidden;
+}
+
+.tabs-port .tab-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: var(--space-4);
+}
+
 .tab-buttons-port {
   position: sticky;
   top: var(--header-height);
   z-index: 50;
   padding: 10px 0 12px;
-  margin-bottom: var(--space-4);
   background: rgba(244, 248, 252, 0.98);
   backdrop-filter: blur(8px);
   border-bottom: 2px solid var(--line);
@@ -497,10 +507,6 @@ textarea:focus-visible {
 #port-higashihama:checked ~ .tab-panels .port-panel-higashihama,
 #port-kamome:checked ~ .tab-panels .port-panel-kamome {
   display: block;
-}
-
-.tabs-port {
-  overflow: hidden;
 }
 
 .tabs-port .tab-panels > .tab-panel {
@@ -842,13 +848,13 @@ textarea:focus-visible {
     --space-8: 40px;
   }
 
+  .container {
+    width: min(calc(100% - 16px), var(--container));
+  }
+
   body {
     font-size: 16px;
     line-height: 1.85;
-  }
-
-  .container {
-    width: min(calc(100% - 16px), var(--container));
   }
 
   .site-header {
@@ -941,34 +947,38 @@ textarea:focus-visible {
     line-height: 1.8;
   }
 
-  /* メインタブ */
+  /* チャレンジ / ファイナル */
   .tabs-main .tab-buttons {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+    margin-bottom: 20px;
   }
 
   .tabs-main .tab-button {
-    width: auto;
+    width: 100%;
     min-width: 0;
-    flex: 1 1 0;
     min-height: 46px;
-    padding: 10px 12px;
+    padding: 10px 8px;
     font-size: 0.95rem;
     white-space: nowrap;
   }
 
-  /* 漁港タブ */
+  /* 漁港タブだけ横スクロール */
+  .tabs-port {
+    overflow: hidden;
+  }
+
   .tabs-port .tab-buttons {
     display: flex;
-    flex-direction: row;
     flex-wrap: nowrap;
     gap: 8px;
     margin-bottom: 16px;
+    width: 100%;
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+    padding-bottom: 2px;
   }
 
   .tabs-port .tab-button {
@@ -979,6 +989,11 @@ textarea:focus-visible {
     padding: 10px 14px;
     font-size: 0.95rem;
     white-space: nowrap;
+  }
+
+  .tab-buttons-port {
+    top: var(--header-height);
+    padding: 8px 0 10px;
   }
 
   .tabs-port .tab-panels > .tab-panel {
@@ -1070,8 +1085,8 @@ textarea:focus-visible {
   }
 
   .tabs-main .tab-button {
-    font-size: 0.9rem;
-    padding: 10px 8px;
+    font-size: 0.88rem;
+    padding: 10px 6px;
   }
 
   .sponsor-grid {
