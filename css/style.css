@@ -1269,3 +1269,18 @@ body {
   flex: 0 0 auto;
   white-space: nowrap;
 }
+
+@media (max-width: 640px) {
+
+  /* メインタブだけ幅リセット */
+  .tabs-main .tab-button {
+    width: auto !important;
+    flex: 1;
+  }
+
+  /* 港タブも幅リセット */
+  .tabs-port .tab-button {
+    width: auto !important;
+  }
+
+}
