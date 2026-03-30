@@ -120,9 +120,6 @@ textarea {
   white-space: nowrap;
 }
 
-/* =========================
-   Focus
-========================= */
 a:focus-visible,
 button:focus-visible,
 label:focus-visible,
@@ -134,9 +131,6 @@ textarea:focus-visible {
   border-radius: 6px;
 }
 
-/* =========================
-   Header
-========================= */
 .site-header {
   position: sticky;
   top: 0;
@@ -182,9 +176,6 @@ textarea:focus-visible {
     serif;
 }
 
-/* =========================
-   Hero
-========================= */
 .hero {
   position: relative;
   overflow: hidden;
@@ -259,9 +250,6 @@ textarea:focus-visible {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* =========================
-   Sections
-========================= */
 .section {
   padding: var(--space-8) 0;
 }
@@ -319,9 +307,6 @@ textarea:focus-visible {
   color: var(--text-soft);
 }
 
-/* =========================
-   Card Base
-========================= */
 .info-card,
 .event-header-card,
 .boats-panel,
@@ -333,9 +318,6 @@ textarea:focus-visible {
   box-shadow: var(--shadow-md);
 }
 
-/* =========================
-   Info Card
-========================= */
 .info-card {
   position: relative;
   padding: 24px;
@@ -378,9 +360,6 @@ textarea:focus-visible {
   margin-top: 0.5em;
 }
 
-/* =========================
-   Event Header
-========================= */
 .event-header-card {
   padding: 24px;
   border-left: 8px solid var(--blue);
@@ -401,9 +380,6 @@ textarea:focus-visible {
   line-height: 1.95;
 }
 
-/* =========================
-   Tabs
-========================= */
 .tabs > input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -441,7 +417,6 @@ textarea:focus-visible {
   box-shadow: var(--shadow-md);
 }
 
-/* メインタブ */
 .tabs-main .tab-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -465,9 +440,8 @@ textarea:focus-visible {
   display: block;
 }
 
-/* 漁港タブ */
 .tabs-port {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .tabs-port .tab-buttons {
@@ -481,14 +455,27 @@ textarea:focus-visible {
   position: sticky;
   top: var(--header-height);
   z-index: 50;
-  padding: 10px 0 12px;
-  background: rgba(244, 248, 252, 0.98);
-  backdrop-filter: blur(8px);
-  border-bottom: 2px solid var(--line);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
+  padding: 10px 0 12px;
+  background: rgba(244, 248, 252, 0.98);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--line);
+}
+
+.tab-buttons-port .tab-button {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: max-content;
+  white-space: nowrap;
 }
 
 #port-hiroro:checked ~ .tab-buttons label[for="port-hiroro"],
@@ -513,9 +500,6 @@ textarea:focus-visible {
   padding-top: 8px;
 }
 
-/* =========================
-   Boats
-========================= */
 .boats-panel {
   padding: var(--space-4);
   background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
@@ -630,7 +614,7 @@ textarea:focus-visible {
   min-height: 48px;
   width: 100%;
   padding: 11px 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   text-decoration: none;
   line-height: 1.5;
   font-weight: 800;
@@ -659,13 +643,38 @@ textarea:focus-visible {
   border-color: var(--line-strong);
 }
 
+.boat-link-instagram {
+  background: #ffffff;
+  color: var(--blue-strong);
+  border-color: var(--blue-strong);
+}
+
+.boat-link-site {
+  background: #ffffff;
+  color: var(--blue-strong);
+  border-color: var(--line);
+  font-weight: 700;
+}
+
+.boat-link-main.boat-link-tel:hover,
+.boat-link-tel.boat-link-main:hover {
+  background: #1a4d7e;
+  border-color: #1a4d7e;
+}
+
+.boat-link-instagram:hover {
+  background: #f8fbff;
+}
+
+.boat-link-site:hover {
+  background: #fafcff;
+  border-color: var(--line-strong);
+}
+
 .placeholder-card {
   min-height: 160px;
 }
 
-/* =========================
-   Sponsor
-========================= */
 .sponsor-grid {
   display: grid;
   gap: var(--space-4);
@@ -697,9 +706,6 @@ textarea:focus-visible {
   border-color: #444;
 }
 
-/* =========================
-   Flyer
-========================= */
 .flyer-grid {
   display: grid;
   gap: var(--space-4);
@@ -761,9 +767,6 @@ textarea:focus-visible {
   box-shadow: var(--shadow-md);
 }
 
-/* =========================
-   Footer
-========================= */
 .site-footer {
   border-top: 2px solid var(--line);
   background: linear-gradient(180deg, #eef5fb 0%, #e4edf6 100%);
@@ -786,9 +789,6 @@ textarea:focus-visible {
   line-height: 1.9;
 }
 
-/* =========================
-   Utility
-========================= */
 .note-text {
   color: var(--text-soft);
 }
@@ -801,9 +801,6 @@ textarea:focus-visible {
   margin-bottom: 0;
 }
 
-/* =========================
-   Responsive
-========================= */
 @media (max-width: 1100px) {
   .boat-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -947,7 +944,6 @@ textarea:focus-visible {
     line-height: 1.8;
   }
 
-  /* チャレンジ / ファイナル */
   .tabs-main .tab-buttons {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -964,36 +960,47 @@ textarea:focus-visible {
     white-space: nowrap;
   }
 
-  /* 漁港タブだけ横スクロール */
   .tabs-port {
-    overflow: hidden;
+    overflow: visible;
   }
 
-  .tabs-port .tab-buttons {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 8px;
-    margin-bottom: 16px;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 2px;
-  }
-
-  .tabs-port .tab-button {
-    width: auto;
-    flex: 0 0 auto;
-    min-width: max-content;
-    min-height: 42px;
-    padding: 10px 14px;
-    font-size: 0.95rem;
-    white-space: nowrap;
-  }
-
-  .tab-buttons-port {
+  .tabs-port .tab-buttons-port {
+    position: sticky;
     top: var(--header-height);
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
     padding: 8px 0 10px;
+    background: rgba(244, 248, 252, 0.98);
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid var(--line);
+    overflow: visible;
+    margin-bottom: var(--space-4);
+  }
+
+  .tabs-port .tab-buttons-port .tab-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 4px;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .tab-buttons-port .tab-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 4px;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
   }
 
   .tabs-port .tab-panels > .tab-panel {
@@ -1011,7 +1018,7 @@ textarea:focus-visible {
   }
 
   .boat-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
 
@@ -1038,7 +1045,18 @@ textarea:focus-visible {
   .boat-link {
     min-height: 44px;
     padding: 10px 12px;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
+    border-radius: 16px;
+  }
+
+  .boat-link-tel {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    letter-spacing: 0;
+  }
+
+  .boat-link-site {
+    font-size: 0.88rem;
   }
 
   .sponsor-grid {
@@ -1098,9 +1116,6 @@ textarea:focus-visible {
   }
 }
 
-/* =========================
-   Reduced Motion
-========================= */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1114,9 +1129,6 @@ textarea:focus-visible {
   }
 }
 
-/* =========================
-   High Contrast Support
-========================= */
 @media (prefers-contrast: more) {
   :root {
     --line: #7a8ea4;
