@@ -132,9 +132,9 @@ textarea:focus-visible {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
   background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 2px solid var(--line);
@@ -855,8 +855,8 @@ textarea:focus-visible {
   }
 
   .site-header {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    inset: 0 0 auto 0;
   }
 
   .header-inner {
@@ -1149,4 +1149,8 @@ textarea:focus-visible {
   .boat-link-sub {
     border-width: 3px;
   }
+}
+
+#main-content {
+  padding-top: var(--header-height);
 }
