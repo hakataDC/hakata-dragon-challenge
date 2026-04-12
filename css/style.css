@@ -1164,8 +1164,9 @@ textarea:focus-visible {
   display: none;
 }
 
-#sponsor-tab-company:checked ~ .tab-panels .sponsor-panel-company {
-  display: block;
+.tabs-sponsor #sponsor-tab-company:checked ~ .tab-panels .sponsor-panel-company,
+.tabs-sponsor #sponsor-tab-prize:checked ~ .tab-panels .sponsor-panel-prize {
+  display: block !important;
 }
 
 #sponsor-tab-prize:checked ~ .tab-panels .sponsor-panel-prize {
